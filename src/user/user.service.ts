@@ -91,10 +91,9 @@ async create(createUserDto: CreateUserDto): Promise<User> {
 
     const deletedUser = await this.userModel.findByIdAndDelete(id).exec();
     if (!deletedUser) {
-      throw new NotFoundException('المستخدم غير ');
+      throw new NotFoundException('المستخدم غير موجود');
     }
 
     return deletedUser;
   }
 }
-///

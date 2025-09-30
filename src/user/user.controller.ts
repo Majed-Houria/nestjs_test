@@ -3,10 +3,8 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-import { UserExceptionsFilter } from './filters/user-exceptions.filter';
 
 @Controller('user')
-@UseFilters(UserExceptionsFilter)
 
 export class UserController {
   constructor(private readonly userService: UserService) {}

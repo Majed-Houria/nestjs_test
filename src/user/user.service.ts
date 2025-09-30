@@ -4,6 +4,7 @@ import { isValidObjectId, Model } from 'mongoose';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User, UserDocument } from './entities/user.entity';
+import { MESSAGES } from '@nestjs/core/constants';
 
 @Injectable()
 export class UserService {
@@ -50,7 +51,7 @@ async create(createUserDto: CreateUserDto): Promise<User> {
 
   async findOne(id: string): Promise<User> {
     if (!isValidObjectId(id)) {
-      throw new BadRequestException({
+      throw new NotFoundException({
         message: 'معرّف المستخدم غير صالح',
       });
     }
@@ -60,7 +61,6 @@ async create(createUserDto: CreateUserDto): Promise<User> {
     if (!user) {
       throw new NotFoundException({
         message: 'المستخدم غير موجود',
-        details: { attemptedId: id }
       });
     }
 

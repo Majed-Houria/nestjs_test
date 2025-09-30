@@ -3,10 +3,24 @@ import { Document } from 'mongoose';
 
 export type UserDocument = User & Document;
 
-@Schema({ toJSON: { virtuals: true }, toObject: { virtuals: true } })
-
+@Schema({
+  toJSON: {
+    virtuals: false,
+    versionKey: false,
+    transform: (_doc, ret) => {
+      return ret;
+    },
+  },
+  toObject: {
+    virtuals: false,
+    versionKey: false,
+    transform: (_doc, ret) => {
+      return ret;
+    },
+  },
+})
 export class User {
-  @Prop({ required: true , unique: true})
+  @Prop({ required: true, unique: true })
   name: string;
 
   @Prop({ required: true })
@@ -14,7 +28,3 @@ export class User {
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
-
-UserSchema.virtual('id').get(function () {
-  return this._id.toHexString();
-});
